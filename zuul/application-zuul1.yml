@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: zuul-server-1
+
+server:
+  port: 15820
+  tomcat.max-threads: 1000
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.1.220.145:15821/eureka/,http://10.1.220.146:15821/eureka/,http://10.1.220.147:15821/eureka/
+zuul:
+  routes:
+    app01:
+      path: /service01/**
+      service-id: service01
+    app02:
+      path: /service02/**
+      service-id: service02
+  sensitive-headers: 
+  add-host-header: true
+ 
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  

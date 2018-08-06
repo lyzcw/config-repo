@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: zuul-server-2
+
+server:
+  port: 15820
+  tomcat.max-threads: 1000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cloud001:15821/eureka/,http://cloud002:15821/eureka/,http://cloud003:15821/eureka/
+
+zuul:
+  routes:
+    app01:
+      path: /service01/**
+      serviceId: service01
+    app02:
+      path: /service02/**
+      serviceId: service02
+  sensitive-headers:              #设置忽略的头信息，设置为空能解决会话保持问题
+  add-host-header: true       #设为true才能保持Host头信息处理正确
+  
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  
